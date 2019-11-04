@@ -6,7 +6,8 @@ import cloneDeep from 'lodash.clonedeep'
 import common from '@/utils/common'
 
 import { isPath, getCloneItem, itemRemove } from '@/utils/utils'
-// import FormPreview from './form-preview'
+import FormPreview from './form-preview'
+import CusDialog from './cus-dialog'
 
 export default {
   name: 'FormDesign',
@@ -17,11 +18,12 @@ export default {
       currentItem: null,
       currentItemPath: null,
       formData: {},
-      opened: false,
+      visible: false,
       configActive: 'itemConfig'
     }
   },
   components: {
+    CusDialog,
     draggable
   },
   methods: {
@@ -35,38 +37,29 @@ export default {
       // this.currentItem = item
     },
 
-    showPreview(e) {
-      console.log(e)
-      this.opened = true
-      // const content = this.$createElement(FormPreview, {
-      //   props: {
-      //     formItems: this.baseComponents,
-      //     fotmData: {}
-      //   }
-      // })
-      // console.log(content)
-      // this.$Modal({
-      //   title: '可要',
-      //   component: {
-      //     vue: FormPreview,
-      //     datas: {
-      //       formItems: this.baseComponents,
-      //       formData: {}
-      //     }
-      //   }
-      // })
-      // this.$Modal({
-      //   title: '预览',
-      //   width: 1000,
-      //   component: {
-      //     // 这里也可以定义异步调用
-      //     // vue: (resolve) => {
-      //     //   require(['./modalTest'], resolve);
-      //     // },
-      //     vue: FormPreview,
-      //     datas: { formItems: this.baseComponents, formData: {} } // 子组件使用props params参数获取数据，建议使用datas
-      //   }
-      // })
+    // 关闭预览
+    closePreview() {
+      this.visible = false
+      this.formData = {}
+    },
+
+    resetPreview() {
+      this.$refs.previewForm.resetForm()
+    },
+
+    getData() {
+      this.$refs.previewForm.submit()
+      // this.$refs.previewForm
+      //   .getData()
+      //   .then(res => {
+      //     console.log(res)
+      //     this.$msgbox({ message: res })
+      //   })
+      //   .catch(err => console.log(err, 'erro'))
+    },
+
+    showPreview() {
+      this.visible = true
     },
     // 递归函数
     loop(arr, index) {
@@ -221,11 +214,16 @@ export default {
       // this.currentItemPath = newPath
     },
     getJSON() {
-      // console.log(JSON.stringify(this.baseComponents))
       const jsonData = JSON.stringify(this.baseComponents)
-      this.$Modal({
+      this.$msgbox({
         title: 'JSON',
-        content: `<textarea>${jsonData}</textarea>`
+        message: this.$createElement('ElInput', {
+          attrs: {
+            type: 'textarea',
+            row: 10,
+            value: jsonData
+          }
+        })
       })
     },
     cloneCom(original) {
@@ -302,11 +300,40 @@ export default {
       </draggable>
     )
 
-    let currentItemConfig = <div>请先选择组件</div>
+    const previewDialog = (
+      <cus-dialog
+        visible={this.visible}
+        onClose={this.closePreview}
+        ref="widgetPreview"
+        width="1000px"
+        form
+      >
+        <FormPreview
+          ref="previewForm"
+          formItems={this.baseComponents}
+          formData={this.formData}
+        />
+        <template slot="action">
+          <el-button type="primary" onClick={this.getData}>
+            获取数据
+          </el-button>
+          <el-button onClick={this.resetPreview}>重置</el-button>
+        </template>
+      </cus-dialog>
+    )
+
+    let currentItemConfig = (
+      <ElAlert
+        title="请先选择组件"
+        type="info"
+        showIcon
+        closable={false}
+      ></ElAlert>
+    )
 
     if (this.currentItem) {
       const config = common.getComponentConfig(this.currentItem.type)
-      console.log(config, this.currentItem.type)
+      // console.log(config, this.currentItem.type)
       currentItemConfig = this.$createElement(config, {
         props: { item: this.currentItem }
       })
@@ -323,6 +350,7 @@ export default {
           </ElTabs>
         </ElAside>
         <ElMain class="form-design-container">
+          {previewDialog}
           <div>
             <ElButton type="primary" onClick={this.getJSON}>
               获取数据

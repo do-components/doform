@@ -8,7 +8,8 @@ const baseComponent = [
     },
     config: {
       label: '单行文本',
-      default: ''
+      default: '',
+      required: false
     }
   },
   {
