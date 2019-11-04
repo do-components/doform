@@ -91,9 +91,11 @@ export default {
                   pull: true,
                   put: true
                 }}
+                data-id={indexs}
                 // handle=".masking__drag"
                 animation={150}
-                nativeOnAdd={e => this.sortableAdd(e)}
+                // nativeOn={e => this.sortableAddGrid(e)}
+                move={this.sortableAddGrid}
                 nativeOnClick={this.selectContainer.bind(this, item)}
               >
                 {that.loop(item.children, indexs)}
@@ -147,10 +149,32 @@ export default {
     onAdd(e) {
       console.log(e, 'add')
     },
-    sortableAdd2(evt) {
-      console.log(evt)
-    },
     sortableAdd(evt) {
+      evt.stopPropagation()
+      const nameOrIndex = evt.clone.getAttribute('data-id')
+
+      // 父节点路径
+      const parentPath = evt.path[1].getAttribute('data-id')
+      console.log(evt, parentPath, nameOrIndex)
+      return false
+    },
+    sortableAddGrid(evt) {
+      const toIndexs = evt.to.getAttribute('data-id')
+      const dragElmType = evt.draggedContext.element.type
+      if (toIndexs) {
+        if (toIndexs.split('-').length > 1) {
+          // if (dragElmType === 'grid') {
+          //   return false
+          // } else {
+          //   return true
+          // }
+          return dragElmType === 'grid'
+        }
+      }
+      console.log(evt.to.getAttribute('data-id'), dragElmType, 'grid2')
+      return true
+    },
+    sortableAdd1(evt) {
       // evt.stopPropagation()
       // 组件名或路径
       const nameOrIndex = evt.clone.getAttribute('data-id')
@@ -371,7 +395,7 @@ export default {
               }}
               // handle=".masking__drag"
               animation={150}
-              nativeOnAdd={e => this.sortableAdd(e)}
+              move={this.sortableAddGrid}
               key={uniqueId()}
             >
               {result}
