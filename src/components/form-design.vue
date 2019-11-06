@@ -94,8 +94,7 @@ export default {
                 data-id={indexs}
                 // handle=".masking__drag"
                 animation={150}
-                // nativeOn={e => this.sortableAddGrid(e)}
-                move={this.sortableAddGrid}
+                move={this.sortItemMove}
                 nativeOnClick={this.selectContainer.bind(this, item)}
               >
                 {that.loop(item.children, indexs)}
@@ -158,20 +157,13 @@ export default {
       console.log(evt, parentPath, nameOrIndex)
       return false
     },
-    sortableAddGrid(evt) {
+    sortItemMove(evt) {
       const toIndexs = evt.to.getAttribute('data-id')
       const dragElmType = evt.draggedContext.element.type
-      if (toIndexs) {
-        if (toIndexs.split('-').length > 1) {
-          // if (dragElmType === 'grid') {
-          //   return false
-          // } else {
-          //   return true
-          // }
-          return dragElmType === 'grid'
-        }
+      if (toIndexs && toIndexs.split('-').length > 0) {
+        return dragElmType !== 'grid'
       }
-      console.log(evt.to.getAttribute('data-id'), dragElmType, 'grid2')
+      console.log(dragElmType, 'grid2')
       return true
     },
     sortableAdd1(evt) {
@@ -313,6 +305,7 @@ export default {
         list={this.componentList}
         clone={this.cloneCom}
         class="component-list"
+        move={this.sortItemMove}
       >
         {this.componentList.map((item, index) => {
           return (
@@ -395,7 +388,7 @@ export default {
               }}
               // handle=".masking__drag"
               animation={150}
-              move={this.sortableAddGrid}
+              move={this.sortItemMove}
               key={uniqueId()}
             >
               {result}
