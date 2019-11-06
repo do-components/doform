@@ -57,7 +57,6 @@ export default {
       //   })
       //   .catch(err => console.log(err, 'erro'))
     },
-
     showPreview() {
       this.visible = true
     },
@@ -81,8 +80,8 @@ export default {
                 // class="container-block"
                 class={
                   this.currentItem && item.key === this.currentItem.key
-                    ? `container-block container-current`
-                    : `container-block`
+                    ? `container-block container-current ${item.type}`
+                    : `container-block ${item.type}`
                 }
                 list={item.children}
                 ref={c => c && (this.sortable = c.sortable)}
@@ -108,6 +107,58 @@ export default {
                 </div>
               </div>
             ]
+          )
+        }
+        if (item.columns) {
+          const ChildForm = common.getComponent(item.type)
+          const dragarea = (
+            <draggable
+              key={uniqueId()}
+              // class="container-block"
+              class={
+                this.currentItem && item.key === this.currentItem.key
+                  ? `container-block container-table container-current`
+                  : `container-block container-table`
+              }
+              list={item.columns}
+              ref={c => c && (this.sortable = c.sortable)}
+              group={{
+                name: 'formItem',
+                pull: true,
+                put: true
+              }}
+              data-id={indexs}
+              // handle=".masking__drag"
+              animation={150}
+              move={this.sortItemMove}
+              nativeOnClick={this.selectContainer.bind(this, item)}
+            >
+              {that.loop(item.columns, indexs)}
+            </draggable>
+          )
+          const actionItems = (
+            <div class="container-actions">
+              <div class="delete" onClick={that.deleteItem.bind(this, indexs)}>
+                <i class="el-icon-delete"></i>
+              </div>
+            </div>
+          )
+          console.log(item.columns)
+          return that.$createElement(
+            ChildForm,
+            {
+              props: {
+                item: item,
+                items: []
+              },
+              on: {
+                'add-item': value => {
+                  console.log(value, 'add dd')
+                  item.columns = value
+                }
+              }
+            },
+            [dragarea, actionItems]
           )
         }
         // const ComponentInfo =
@@ -161,9 +212,8 @@ export default {
       const toIndexs = evt.to.getAttribute('data-id')
       const dragElmType = evt.draggedContext.element.type
       if (toIndexs && toIndexs.split('-').length > 0) {
-        return dragElmType !== 'grid'
+        return dragElmType !== 'grid' && dragElmType !== 'form-table'
       }
-      console.log(dragElmType, 'grid2')
       return true
     },
     sortableAdd1(evt) {
@@ -421,6 +471,10 @@ export default {
   border: 2px dashed #ccc;
   overflow: hidden;
   cursor: move;
+}
+.container-table,
+.form-table {
+  display: flex;
 }
 .form-container {
   min-height: 400px;

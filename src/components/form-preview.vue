@@ -4,11 +4,14 @@ import draggable from 'vuedraggable'
 import common from '@/utils/common'
 
 import formComponentsMap from '@/components/form-components/'
-
+import FormItem from './form-item'
 const GlobalComponent = formComponentsMap
 export default {
   name: 'FormPreview',
-
+  components: {
+    draggable,
+    FormItem
+  },
   props: {
     formItems: { type: Array, required: true },
     formData: { type: Object, required: true }
@@ -20,14 +23,6 @@ export default {
       currentItemPath: null
       // formData: {}
     }
-  },
-  components: {
-    // Rate,
-    // Input,
-    // MonthPicker,
-    // RangePicker,
-    // WeekPicker,
-    draggable
   },
   methods: {
     rules(item) {
@@ -46,12 +41,20 @@ export default {
       console.log('set val', val)
       this.$set(this.formData, key, val)
     },
+    addItemColunn(item) {
+      console.log(item)
+      if (item.children.length < 1) {
+        alert('模板为空')
+        return false
+      }
+      alert('ok')
+    },
     // 递归函数
     loop(arr, index) {
       const that = this
       const result = arr.map((item, i) => {
         const indexs = index === '' ? String(i) : `${index}-${i}`
-        if (item.children) {
+        if (item.children && item.type == 'grid') {
           //   const GridInfo = GlobalComponent[common.getComponentName(item.name)]
           //   const grid = that.$createElement(
           //     GridInfo,
@@ -70,6 +73,46 @@ export default {
               </div>
             </div>
           )
+        }
+        if (item.type == 'form-table') {
+          console.log(item)
+          // return item.children.map(col => {
+          return (
+            // <div>
+            //   {that.$createElement(
+            //     GlobalComponent[common.getComponentName(col.type)],
+            //     {
+            //       props: {
+            //         item: col
+            //       }
+            //     },
+            //     <div>{col.type}</div>
+            //   )}
+            // </div>
+            // that.$createElement(FormItem, {
+            //   props: {
+            //     cols: item.children
+            //   }
+            // })
+            <div>
+              <ElTable data={item.columns}>
+                {item.children.map(col => {
+                  return (
+                    <ElTableColumn label={col.config.label}>
+                      {col.type}
+                    </ElTableColumn>
+                  )
+                })}
+              </ElTable>
+              <ElButton
+                type="primary"
+                onClick={this.addItemColunn.bind(this, item)}
+              >
+                添加
+              </ElButton>
+            </div>
+          )
+          // })
         }
         const ComponentInfo =
           GlobalComponent[common.getComponentName(item.type)]

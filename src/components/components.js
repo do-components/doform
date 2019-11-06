@@ -18,6 +18,15 @@ const baseComponent = [
     config: {
       column: 24
     }
+  },
+  {
+    type: 'form-table',
+    name: '子表',
+    config: {
+      column: 1
+    },
+    columns: [],
+    children: []
   }
   // {
   //   name: 'Input',
