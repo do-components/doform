@@ -1,6 +1,6 @@
 <template>
   <div :class="classes" :data-id="dataID">
-    <el-button type="primary" @click="addItem">Add</el-button>
+    <!-- <el-button type="primary" @click="addItem">Add</el-button> -->
     <!-- <div v-for="(newItem, index) in newItems" :key="index">
       {{ newItem }}
     </div> -->

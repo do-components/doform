@@ -1,6 +1,9 @@
 <template>
   <div class="about">
     <FormPreview :formItems="formItems" :formData="formData" ref="formPreview">
+      <el-form-item label="附加的" prop="name">
+        <el-input type="text" v-model="formData.name" />
+      </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="getData">xiao</el-button>
       </el-form-item>
@@ -52,9 +55,10 @@ export default {
         }
       ],
       formData: {
+        name: '',
         'form-table_1573029062825': [
           { input_15730289804902: 1, input_157302898049022: '123' },
-          { input_15730289804902: 1, input_157302898049022: '123' }
+          { input_15730289804902: 2, input_157302898049022: '222' }
         ],
         input_15730289804930: '12312'
       }

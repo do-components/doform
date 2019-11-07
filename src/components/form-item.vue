@@ -8,14 +8,13 @@ export default {
   name: 'DoFormTable',
   props: {
     item: Object,
-    items: Array,
     dataID: String,
     formData: Object
   },
   data() {
     return {
       temp: { span: 8, list: [] },
-      newItems: this.items
+      newItems: []
     }
   },
   mounted() {
@@ -23,12 +22,6 @@ export default {
       this.formData[this.item.key] &&
       this.formData[this.item.key].length > 0
     ) {
-      console.log(
-        this.item.columns,
-        'cols',
-        this.formData[this.item.key],
-        this.formData
-      )
       this.formData[this.item.key].forEach(i => {
         console.log(i, 'i is')
         if (this.item.children.length < 1) {
@@ -37,12 +30,12 @@ export default {
         }
         // alert('ok')
         const temp = cloneDeep(this.item.children)
-
         this.item.columns.push(temp)
       })
       console.log('this ite', this.item)
     }
   },
+
   computed: {
     classes() {
       return `container el-col el-col-24`
@@ -89,6 +82,7 @@ export default {
       console.log('reslt', this.formData)
     },
     removeColumn(idx) {
+      console.log(idx, 'idxs is')
       this.item.columns.splice(idx, 1)
       this.formData[this.item.key].splice(idx, 1)
     },
@@ -154,7 +148,7 @@ export default {
                 <td>
                   <ElButton
                     type="danger"
-                    onClick={this.removeColumn.bind(this.idx)}
+                    onClick={this.removeColumn.bind(this, idx)}
                   >
                     删除
                   </ElButton>

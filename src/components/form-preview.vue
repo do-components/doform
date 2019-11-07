@@ -90,14 +90,17 @@ export default {
           if (this.formData[item.key] === undefined) {
             this.$set(this.formData, item.key, [])
           }
+          // debugger
+
           // return item.children.map(col => {
           return that.$createElement(FormItem, {
             props: {
               item: item,
-              items: item.children,
+              // items: item.children,
               formData: this.formData
             }
           })
+          // return <div>xiao</div>
           // })
         }
         const ComponentInfo =
@@ -130,6 +133,14 @@ export default {
         )
       })
       return result
+    },
+    resetData() {
+      this.formItems.forEach(item => {
+        if (item.columns) {
+          item.columns = []
+        }
+        delete this.formData[item.key]
+      })
     },
     resetForm() {
       console.log('reset')
@@ -169,6 +180,9 @@ export default {
   },
   computed: {},
   mounted() {},
+  destroyed() {
+    // this.resetData()
+  },
   watch: {
     formData: {
       handler(value) {

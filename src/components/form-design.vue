@@ -19,7 +19,8 @@ export default {
       currentItemPath: null,
       formData: {},
       visible: false,
-      configActive: 'itemConfig'
+      configActive: 'itemConfig',
+      formKey: 0
     }
   },
   components: {
@@ -40,7 +41,22 @@ export default {
     // 关闭预览
     closePreview() {
       this.visible = false
+      this.$refs.previewForm.resetData()
+      // this.formKey++
       // this.formData = {}
+      // this.baseComponents.map(item => {
+      //   this.$set(item, 'columns', [])
+
+      // if (item.columns && item.columns.length > 0) {
+      //   item.columns = []
+
+      //   return item
+      // } else {
+      //   return item
+      // }
+      // })
+      // console.log(this.baseComponents, 'base')
+      // this.$refs.previewForm.resetForm()
     },
 
     resetPreview() {
