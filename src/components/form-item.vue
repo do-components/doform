@@ -41,12 +41,18 @@ export default {
       return `container el-col el-col-24`
     },
     columns() {
-      const items = new Array(parseInt(this.item.config.column))
+      const items = this.item.columns
       console.log(items.length)
       return items
     }
   },
   methods: {
+    onInput(e) {
+      console.log(e, 'eeeeee')
+    },
+    getComponent(type) {
+      return GlobalComponent[common.getComponentName(type)]
+    },
     rules(item) {
       let rules = []
       if (item.config.required) {
@@ -102,66 +108,149 @@ export default {
   },
   render(h) {
     const item = this.item
-    const indexs = this.dataID
-    const that = this
+    // const indexs = this.dataID
+    // const that = this
     return (
       <div>
-        {item.columns.map((cols, idx) => {
-          return (
-            <table>
-              <tr>
-                {cols.map(col => {
-                  const ComponentInfo =
-                    GlobalComponent[common.getComponentName(col.type)]
+        <el-table data={this.item.columns}>
+          {this.item.children.map((col, idx) => {
+            const ComponentInfo =
+              GlobalComponent[common.getComponentName(col.type)]
+            console.log(ComponentInfo, idx)
+            return h('el-table-column', {
+              props: {
+                label: col.config.label
+              },
+              scopedSlots: {
+                // 表头对应的内容， 里面可根据需求自定义
+                default: scope => {
+                  const com =
+                    GlobalComponent[
+                      common.getComponentName(scope.row[idx].type)
+                    ]
+                  const index = scope.$index
                   return (
-                    <span>
-                      <td>
-                        {
-                          <div class="component-container" data-id={indexs}>
-                            <ElFormItem
-                              label={col.config.label}
-                              prop={`${item.key}.${idx}.${col.key}`}
-                              rules={this.rules(col)}
-                            >
-                              {h(ComponentInfo, {
-                                props: {
-                                  item: col,
-                                  formData: this.formData,
-                                  value: this.formData[item.key][idx][col.key]
-                                },
-                                on: {
-                                  input: value => {
-                                    console.log('value change is', value)
-                                    that.formData[item.key][idx][
-                                      col.key
-                                    ] = value
-                                  }
-                                }
-                              })}
-                            </ElFormItem>
-                          </div>
+                    <el-form-item
+                      labelWidth="0px"
+                      prop={`${item.key}.${index}.${col.key}`}
+                      rules={this.rules(col)}
+                    >
+                      {h(com, {
+                        props: {
+                          item: item,
+                          formData: this.formData,
+                          value: this.formData[item.key][index][col.key]
+                        },
+                        on: {
+                          input: value => {
+                            console.log('value change is', value)
+                            this.formData[item.key][index][col.key] = value
+                          }
                         }
-                      </td>
-                    </span>
+                      })}
+                    </el-form-item>
                   )
-                })}
-                <td>
-                  <ElButton
-                    type="danger"
-                    onClick={this.removeColumn.bind(this, idx)}
-                  >
-                    删除
-                  </ElButton>
-                </td>
-              </tr>
-            </table>
-          )
-        })}
-        <ElButton type="primary" onClick={this.addItemColunn.bind(this, item)}>
-          添加
-        </ElButton>
+                }
+              }
+            })
+          })}
+          <el-table-column
+            label="操作"
+            {...{
+              // slots: {
+              //   header: () => {
+              //     return <div>xiaojin</div>
+              //   }
+              // },
+              scopedSlots: {
+                default: scope => {
+                  console.log(scope)
+                  return (
+                    <el-form-item labelWidth="0px">
+                      <el-button
+                        type="text"
+                        size="small"
+                        onClick={this.removeColumn.bind(this, scope.$index)}
+                      >
+                        删除
+                      </el-button>
+                    </el-form-item>
+                  )
+                }
+              }
+            }}
+          >
+            <div slot="header">
+              <el-button
+                type="text"
+                size="small"
+                onClick={this.addItemColunn.bind(this, this.item)}
+              >
+                # 添加
+              </el-button>
+            </div>
+          </el-table-column>
+        </el-table>
       </div>
     )
+    // return (
+    //   <div>
+    //     {item.columns.map((cols, idx) => {
+    //       return (
+    //         <table>
+    //           <tr>
+    //             {cols.map(col => {
+    //               const ComponentInfo =
+    //                 GlobalComponent[common.getComponentName(col.type)]
+    //               return (
+    //                 <span>
+    //                   <td>
+    //                     {
+    //                       <div class="component-container" data-id={indexs}>
+    //                         <ElFormItem
+    //                           label={col.config.label}
+    //                           prop={`${item.key}.${idx}.${col.key}`}
+    //                           rules={this.rules(col)}
+    //                         >
+    //                           {h(ComponentInfo, {
+    //                             props: {
+    //                               item: col,
+    //                               formData: this.formData,
+    //                               value: this.formData[item.key][idx][col.key]
+    //                             },
+    //                             on: {
+    //                               input: value => {
+    //                                 console.log('value change is', value)
+    //                                 that.formData[item.key][idx][
+    //                                   col.key
+    //                                 ] = value
+    //                               }
+    //                             }
+    //                           })}
+    //                         </ElFormItem>
+    //                       </div>
+    //                     }
+    //                   </td>
+    //                 </span>
+    //               )
+    //             })}
+    //             <td>
+    //               <ElButton
+    //                 type="danger"
+    //                 onClick={this.removeColumn.bind(this, idx)}
+    //               >
+    //                 删除
+    //               </ElButton>
+    //             </td>
+    //           </tr>
+    //         </table>
+    //       )
+    //     })}
+    //     <ElButton type="primary" onClick={this.addItemColunn.bind(this, item)}>
+    //       添加
+    //     </ElButton>
+    //   </div>
+    // )
   }
 }
 </script>
