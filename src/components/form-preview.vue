@@ -2,6 +2,7 @@
 // @ is an alias to /src
 import draggable from 'vuedraggable'
 import common from '@/utils/common'
+import cloneDeep from 'lodash.clonedeep'
 
 import formComponentsMap from '@/components/form-components/'
 import FormItem from './form-item'
@@ -21,7 +22,7 @@ export default {
       baseComponents: this.formItems,
       currentItem: null,
       currentItemPath: null
-      // formData: {}
+      // formData: this.data
     }
   },
   methods: {
@@ -42,12 +43,23 @@ export default {
       this.$set(this.formData, key, val)
     },
     addItemColunn(item) {
-      console.log(item)
       if (item.children.length < 1) {
         alert('模板为空')
         return false
       }
-      alert('ok')
+      // alert('ok')
+      const temp = cloneDeep(item.children)
+      let result = {}
+      // if (this.formData[item.key] === undefined) {
+      //   this.formData[item.key] = []
+      // }
+
+      temp.forEach(elm => {
+        result[elm.key] = ''
+      })
+      this.formData[item.key].push(result)
+      item.columns.push(temp)
+      console.log('reslt', this.formData)
     },
     // 递归函数
     loop(arr, index) {
@@ -75,43 +87,17 @@ export default {
           )
         }
         if (item.type == 'form-table') {
-          console.log(item)
+          if (this.formData[item.key] === undefined) {
+            this.$set(this.formData, item.key, [])
+          }
           // return item.children.map(col => {
-          return (
-            // <div>
-            //   {that.$createElement(
-            //     GlobalComponent[common.getComponentName(col.type)],
-            //     {
-            //       props: {
-            //         item: col
-            //       }
-            //     },
-            //     <div>{col.type}</div>
-            //   )}
-            // </div>
-            // that.$createElement(FormItem, {
-            //   props: {
-            //     cols: item.children
-            //   }
-            // })
-            <div>
-              <ElTable data={item.columns}>
-                {item.children.map(col => {
-                  return (
-                    <ElTableColumn label={col.config.label}>
-                      {col.type}
-                    </ElTableColumn>
-                  )
-                })}
-              </ElTable>
-              <ElButton
-                type="primary"
-                onClick={this.addItemColunn.bind(this, item)}
-              >
-                添加
-              </ElButton>
-            </div>
-          )
+          return that.$createElement(FormItem, {
+            props: {
+              item: item,
+              items: item.children,
+              formData: this.formData
+            }
+          })
           // })
         }
         const ComponentInfo =
@@ -183,6 +169,15 @@ export default {
   },
   computed: {},
   mounted() {},
+  watch: {
+    formData: {
+      handler(value) {
+        console.log('formdata', value)
+      },
+      deep: true,
+      immediate: true
+    }
+  },
   render() {
     const result = this.loop(this.baseComponents, '')
     return (

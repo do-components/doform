@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import common from '@/utils/common'
+import common from '../../../utils/common'
 export default {
   name: 'DoFormTable',
   props: {
@@ -19,7 +19,7 @@ export default {
   },
   data() {
     return {
-      temp: { span: 8, list: [] },
+      temp: { name: 'input', mobile: 'input' },
       newItems: this.items
     }
   },
@@ -43,8 +43,7 @@ export default {
   watch: {
     newItems: {
       handler(value) {
-        console.log(value, 'value is')
-        this.$emit('add-item', value)
+        console.log(value)
       }
     }
   }

@@ -40,7 +40,7 @@ export default {
     // 关闭预览
     closePreview() {
       this.visible = false
-      this.formData = {}
+      // this.formData = {}
     },
 
     resetPreview() {
