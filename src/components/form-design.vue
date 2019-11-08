@@ -300,8 +300,8 @@ export default {
     },
     getJSON() {
       const jsonData = JSON.stringify({
-        formItems: this.baseComponents,
-        formConfig: this.formConfig
+        list: this.baseComponents,
+        config: this.formConfig
       })
       this.$msgbox({
         title: 'JSON',
@@ -399,9 +399,9 @@ export default {
       >
         <FormPreview
           ref="previewForm"
-          formItems={{
-            formItems: this.baseComponents,
-            formConfig: this.formConfig
+          formConfig={{
+            list: this.baseComponents,
+            config: this.formConfig
           }}
           formData={this.formData}
         />
@@ -449,37 +449,48 @@ export default {
           </ElTabs>
         </ElAside>
         <ElMain class="form-design-container">
-          {previewDialog}
-          <div>
-            <ElButton type="primary" onClick={this.getJSON}>
-              获取数据
-            </ElButton>
-            <ElButton type="info" onClick={this.showPreview}>
-              预览
-            </ElButton>
-          </div>
-          <ElForm
-            labelWidth={this.formConfig.labelWidth + 'px'}
-            labelPosition={this.formConfig.labelPosition}
-            size={this.formConfig.size}
-          >
-            <draggable
-              class="form-container"
-              list={this.baseComponents}
-              ref={c => c && (this.sortable = c.sortable)}
-              group={{
-                name: 'formItem',
-                pull: true,
-                put: true
-              }}
-              // handle=".masking__drag"
-              animation={150}
-              move={this.sortItemMove}
-              key={uniqueId()}
-            >
-              {result}
-            </draggable>
-          </ElForm>
+          <ElCard>
+            <div class="el-card__header">
+              <div>
+                <ElButton type="primary" size="small" onClick={this.getJSON}>
+                  获取数据
+                </ElButton>
+                <ElButton
+                  type="success"
+                  size="small"
+                  onClick={this.showPreview}
+                >
+                  预览
+                </ElButton>
+              </div>
+            </div>
+            <div class="el-card__body">
+              {previewDialog}
+
+              <ElForm
+                labelWidth={this.formConfig.labelWidth + 'px'}
+                labelPosition={this.formConfig.labelPosition}
+                size={this.formConfig.size}
+              >
+                <draggable
+                  class="form-container"
+                  list={this.baseComponents}
+                  ref={c => c && (this.sortable = c.sortable)}
+                  group={{
+                    name: 'formItem',
+                    pull: true,
+                    put: true
+                  }}
+                  // handle=".masking__drag"
+                  animation={150}
+                  move={this.sortItemMove}
+                  key={uniqueId()}
+                >
+                  {result}
+                </draggable>
+              </ElForm>
+            </div>
+          </ElCard>
         </ElMain>
         <ElAside width="250px">
           <ElTabs vModel={this.configActive}>
@@ -515,8 +526,8 @@ export default {
 }
 .form-container {
   min-height: 400px;
-  border: 3px solid #eee;
-  padding: 30px 20px;
+  // border: 3px solid #eee;
+  // padding: 30px 20px;
   height: 100%;
   overflow: hidden;
 }
@@ -539,7 +550,7 @@ export default {
   // }
 }
 .form-design-container {
-  height: 80vh;
+  height: 95vh;
   .h-form {
     height: 100%;
   }
@@ -595,5 +606,6 @@ export default {
   // margin: 10px;
   padding: 10px;
   padding-left: 0;
+  cursor: move;
 }
 </style>

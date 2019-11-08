@@ -1,6 +1,10 @@
 <template>
   <div class="about">
-    <FormPreview :formItems="formItems" :formData="formData" ref="formPreview">
+    <FormPreview
+      :formConfig="formConfig"
+      :formData="formData"
+      ref="formPreview"
+    >
       <el-form-item label="附加的" prop="name">
         <el-input type="text" v-model="formData.name" />
       </el-form-item>
@@ -18,42 +22,45 @@ export default {
   },
   data: function() {
     return {
-      formItems: [
-        {
-          type: 'input',
-          name: '单行文本',
-          attr: { size: 'large', value: '第一个' },
-          config: { label: '标题内人', default: '', required: true },
-          key: 'input_15730289804930',
-          id: 'input_15730289804930'
-        },
-        {
-          type: 'form-table',
-          name: '子表',
-          config: { column: 1, label: '子表单' },
-          columns: [],
-          children: [
-            {
-              type: 'input',
-              name: '标题2',
-              attr: { size: 'large', value: '第一个' },
-              config: { label: '标题2', default: '', required: false },
-              key: 'input_157302898049022',
-              id: 'input_157302898049022'
-            },
-            {
-              type: 'input',
-              name: '标题',
-              attr: { size: 'large', value: '第一个' },
-              config: { label: '标题', default: 'ok', required: true },
-              key: 'input_15730289804902',
-              id: 'input_15730289804902'
-            }
-          ],
-          key: 'form-table_1573029062825',
-          id: 'form-table_1573029062825'
-        }
-      ],
+      formConfig: {
+        list: [
+          {
+            type: 'input',
+            name: '单行文本',
+            attr: { size: 'large', value: '第一个' },
+            config: { label: '标题内人', default: '', required: true },
+            key: 'input_15730289804930',
+            id: 'input_15730289804930'
+          },
+          {
+            type: 'form-table',
+            name: '子表',
+            config: { column: 1, label: '子表单' },
+            columns: [],
+            children: [
+              {
+                type: 'input',
+                name: '标题2',
+                attr: { size: 'large', value: '第一个' },
+                config: { label: '标题2', default: '', required: false },
+                key: 'input_157302898049022',
+                id: 'input_157302898049022'
+              },
+              {
+                type: 'input',
+                name: '标题',
+                attr: { size: 'large', value: '第一个' },
+                config: { label: '标题', default: 'ok', required: true },
+                key: 'input_15730289804902',
+                id: 'input_15730289804902'
+              }
+            ],
+            key: 'form-table_1573029062825',
+            id: 'form-table_1573029062825'
+          }
+        ],
+        config: { labelWidth: 100, labelPosition: 'right', size: 'small' }
+      },
       formData: {
         name: '',
         'form-table_1573029062825': [
