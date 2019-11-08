@@ -4,7 +4,9 @@
     <!-- <div v-for="(newItem, index) in newItems" :key="index">
       {{ newItem }}
     </div> -->
-    <slot></slot>
+    <el-form-item :label="item.config.label">
+      <slot></slot>
+    </el-form-item>
   </div>
 </template>
 

@@ -5,7 +5,6 @@ const GlobalComponent = formComponentsMap
 import cloneDeep from 'lodash.clonedeep'
 
 export default {
-  name: 'DoFormTable',
   props: {
     item: Object,
     dataID: String,
@@ -112,7 +111,7 @@ export default {
     // const that = this
     return (
       <div>
-        <el-table data={this.item.columns}>
+        <el-table data={this.item.columns} fit={true} border>
           {this.item.children.map((col, idx) => {
             const ComponentInfo =
               GlobalComponent[common.getComponentName(col.type)]
@@ -131,13 +130,14 @@ export default {
                   const index = scope.$index
                   return (
                     <el-form-item
+                      // label={col.config.label}
                       labelWidth="0px"
                       prop={`${item.key}.${index}.${col.key}`}
                       rules={this.rules(col)}
                     >
                       {h(com, {
                         props: {
-                          item: item,
+                          item: col,
                           formData: this.formData,
                           value: this.formData[item.key][index][col.key]
                         },
@@ -168,7 +168,7 @@ export default {
                   return (
                     <el-form-item labelWidth="0px">
                       <el-button
-                        type="text"
+                        type="text danger"
                         size="small"
                         onClick={this.removeColumn.bind(this, scope.$index)}
                       >
@@ -180,15 +180,15 @@ export default {
               }
             }}
           >
-            <div slot="header">
-              <el-button
-                type="text"
-                size="small"
-                onClick={this.addItemColunn.bind(this, this.item)}
-              >
-                # 添加
-              </el-button>
-            </div>
+            <el-button
+              slot="header"
+              type="text"
+              size="small"
+              // icon="el-icon-plus"
+              onClick={this.addItemColunn.bind(this, this.item)}
+            >
+              添加项
+            </el-button>
           </el-table-column>
         </el-table>
       </div>
@@ -255,4 +255,4 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style></style>

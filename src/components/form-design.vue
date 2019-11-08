@@ -8,6 +8,7 @@ import common from '@/utils/common'
 import { isPath, getCloneItem, itemRemove } from '@/utils/utils'
 import FormPreview from './form-preview'
 import CusDialog from './cus-dialog'
+import FormConfig from '@/components/form-config/form'
 
 export default {
   name: 'FormDesign',
@@ -20,11 +21,13 @@ export default {
       formData: {},
       visible: false,
       configActive: 'itemConfig',
-      formKey: 0
+      formKey: 0,
+      formConfig: { labelWidth: 100, labelPosition: 'right', size: 'small' }
     }
   },
   components: {
     CusDialog,
+    FormConfig,
     draggable
   },
   methods: {
@@ -296,7 +299,10 @@ export default {
       // this.currentItemPath = newPath
     },
     getJSON() {
-      const jsonData = JSON.stringify(this.baseComponents)
+      const jsonData = JSON.stringify({
+        formItems: this.baseComponents,
+        formConfig: this.formConfig
+      })
       this.$msgbox({
         title: 'JSON',
         message: this.$createElement('ElInput', {
@@ -393,7 +399,10 @@ export default {
       >
         <FormPreview
           ref="previewForm"
-          formItems={this.baseComponents}
+          formItems={{
+            formItems: this.baseComponents,
+            formConfig: this.formConfig
+          }}
           formData={this.formData}
         />
         <template slot="action">
@@ -421,10 +430,17 @@ export default {
         props: { item: this.currentItem }
       })
     }
-    // 表单设置
+    // 表单项设置
     const config = <div id="component-config">{currentItemConfig}</div>
 
+    const formConfig = (
+      <div id="form-config">
+        <FormConfig config={this.formConfig} />
+      </div>
+    )
+
     const result = this.loop(this.baseComponents, '')
+
     return (
       <ElContainer>
         <ElAside style="width: 250px">
@@ -442,7 +458,11 @@ export default {
               预览
             </ElButton>
           </div>
-          <ElForm labelWidth="100px">
+          <ElForm
+            labelWidth={this.formConfig.labelWidth + 'px'}
+            labelPosition={this.formConfig.labelPosition}
+            size={this.formConfig.size}
+          >
             <draggable
               class="form-container"
               list={this.baseComponents}
@@ -467,7 +487,7 @@ export default {
               {config}
             </ElTabPane>
             <ElTabPane label="表单属性" name="formConfig">
-              表单属性
+              {formConfig}
             </ElTabPane>
           </ElTabs>
         </ElAside>
@@ -491,6 +511,7 @@ export default {
 .container-table,
 .form-table {
   display: flex;
+  overflow: scroll;
 }
 .form-container {
   min-height: 400px;

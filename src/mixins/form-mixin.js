@@ -43,9 +43,9 @@ export default {
         (isArr && value.length === 0)
       ) {
         // 默认值不为空
-        // console.log('值为空，下面判断默认')
+        console.log('值为空，下面判断默认', this.item.config)
         if (common.isDef(this.item.config.default)) {
-          // console.log('有默认值', this.item.config.default)
+          console.log('有默认值', this.item.config.default)
           let defaultValue = this.item.config.default
           //   // 判断是否有格式化函数
           //   if (this.desc.displayFormatter) {

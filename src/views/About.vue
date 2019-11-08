@@ -30,14 +30,14 @@ export default {
         {
           type: 'form-table',
           name: '子表',
-          config: { column: 1 },
+          config: { column: 1, label: '子表单' },
           columns: [],
           children: [
             {
               type: 'input',
               name: '标题2',
               attr: { size: 'large', value: '第一个' },
-              config: { label: '标题2', default: '', required: true },
+              config: { label: '标题2', default: '', required: false },
               key: 'input_157302898049022',
               id: 'input_157302898049022'
             },
@@ -45,7 +45,7 @@ export default {
               type: 'input',
               name: '标题',
               attr: { size: 'large', value: '第一个' },
-              config: { label: '标题', default: '', required: true },
+              config: { label: '标题', default: 'ok', required: true },
               key: 'input_15730289804902',
               id: 'input_15730289804902'
             }
@@ -58,8 +58,8 @@ export default {
         name: '',
         'form-table_1573029062825': [
           { input_15730289804902: 1, input_157302898049022: '123' },
-          { input_15730289804902: 2, input_157302898049022: '333' },
-          { input_15730289804902: 3, input_157302898049022: '333' }
+          { input_15730289804902: 2, input_157302898049022: '333' }
+          // { input_15730289804902: 3, input_157302898049022: '333' }
         ],
         input_15730289804930: '12312'
       }
@@ -73,3 +73,27 @@ export default {
   }
 }
 </script>
+<style>
+/* .el-form-item .el-form-item {
+  margin-bottom: 22px !important;
+}
+.el-table__header tr,
+.el-table__header th {
+  padding: 0;
+  height: 40px;
+}
+.el-table__body tr,
+.el-table__body td {
+  padding: 0;
+  height: 40px;
+} */
+/* .el-table td {
+  border-bottom: 0 !important;
+}
+.el-form-item .el-form-item {
+  margin-bottom: 22px !important;
+} */
+.el-table th {
+  /* padding: 0 10px !important; */
+}
+</style>

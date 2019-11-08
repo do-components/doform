@@ -14,12 +14,12 @@ export default {
     FormItem
   },
   props: {
-    formItems: { type: Array, required: true },
+    formItems: { type: Object, required: true },
     formData: { type: Object, required: true }
   },
   data() {
     return {
-      baseComponents: this.formItems,
+      baseComponents: this.formItems.formItems,
       currentItem: null,
       currentItemPath: null
       // formData: this.data
@@ -93,13 +93,30 @@ export default {
           // debugger
 
           // return item.children.map(col => {
-          return that.$createElement(FormItem, {
-            props: {
-              item: item,
-              // items: item.children,
-              formData: this.formData
-            }
-          })
+          return (
+            <el-form-item label={item.config.label}>
+              {that.$createElement(FormItem, {
+                props: {
+                  item: item,
+                  // items: item.children,
+                  formData: this.formData
+                }
+              })}
+            </el-form-item>
+            // <el-form-item label={item.config.label}>
+            //   <el-card class="box-card" shadow="never">
+            //     <div>
+            //       {that.$createElement(FormItem, {
+            //         props: {
+            //           item: item,
+            //           // items: item.children,
+            //           formData: this.formData
+            //         }
+            //       })}
+            //     </div>
+            //   </el-card>
+            // </el-form-item>
+          )
           // return <div>xiao</div>
           // })
         }
@@ -135,7 +152,7 @@ export default {
       return result
     },
     resetData() {
-      this.formItems.forEach(item => {
+      this.formItems.formItems.forEach(item => {
         if (item.columns) {
           item.columns = []
         }
@@ -197,8 +214,10 @@ export default {
     return (
       <div class="form-preview-container">
         <ElForm
-          labelWidth="100px"
+          labelWidth={this.formItems.formConfig.labelWidth + 'px'}
+          labelPosition={this.formItems.formConfig.labelPosition}
           ref="previewForm"
+          size={this.formItems.formConfig.size}
           // validateOnRuleChange={false}
           {...{
             props: {

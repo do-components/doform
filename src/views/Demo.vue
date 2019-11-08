@@ -1,73 +1,120 @@
 <template>
-  <el-form
-    :model="dynamicValidateForm"
-    ref="dynamicValidateForm"
-    label-width="100px"
-    class="demo-dynamic"
-  >
-    <el-form-item
-      v-for="(domain, index) in dynamicValidateForm.domains"
-      :label="'域名' + index"
-      :key="domain.key"
-      :prop="'domains.' + index + '.value'"
-      :rules="[
-        {
-          required: true,
-          message: '域名不能为空',
-          trigger: 'blur'
-        }
-      ]"
+  <div>
+    <el-form
+      label-position="right"
+      status-icon
+      :rules="rules"
+      :model="ruleForm"
+      ref="ruleForm"
     >
-      <el-input v-model="domain.value"></el-input>
-      <el-button @click.prevent="removeDomain(domain)">删除</el-button>
-    </el-form-item>
-    <el-form-item>
-      <el-button type="primary" @click="submitForm('dynamicValidateForm')">
-        提交
-      </el-button>
-      <el-button @click="addDomain">新增域名</el-button>
-      <el-button @click="resetForm('dynamicValidateForm')">重置</el-button>
-    </el-form-item>
-    <form-table :items="dynamicValidateForm.domains" />
-  </el-form>
+      <el-table :data="ruleForm.evidenceTemplateList">
+        <el-table-column
+          type="index"
+          label="序号"
+          align="center"
+          width="70"
+        ></el-table-column>
+        <el-table-column
+          label="证据名称"
+          align="center"
+          style="margin-left: 0px !important;"
+        >
+          <template slot-scope="scope">
+            <el-form-item
+              :prop="'evidenceTemplateList.' + scope.$index + '.name'"
+              :rules="rules.name"
+            >
+              <el-input
+                v-if="scope.$index < ruleForm.evidenceTemplateList.length - 1"
+                v-model="scope.row.name"
+                :maxlength="50"
+              ></el-input>
+              <el-input
+                v-if="scope.$index == ruleForm.evidenceTemplateList.length - 1"
+                v-model="scope.row.name"
+                :maxlength="50"
+                @change="evidChangeLast(scope.row.name)"
+              ></el-input>
+            </el-form-item>
+          </template>
+        </el-table-column>
+        <el-table-column align="center" label="操作">
+          <template slot-scope="scope">
+            <el-button
+              v-if="scope.$index < ruleForm.evidenceTemplateList.length - 1"
+              type="danger"
+              size="mini"
+              @click="delEvid(scope.row, scope.$index)"
+            >
+              删除
+            </el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+    </el-form>
+    <div slot="footer" class="dialog-footer">
+      <el-button type="primary" size="mini" @click="saveData()">保存</el-button>
+      <el-button size="mini" @click="closeDialog()">取消</el-button>
+    </div>
+  </div>
 </template>
+
 <script>
-import FormTable from '@/components/form-components/form-table/form-table'
 export default {
-  components: {
-    FormTable
-  },
+  components: {},
   data() {
     return {
-      dynamicValidateForm: {
-        email: ''
+      evidenceTemplateGroup: {
+        id: '',
+        name: '',
+        nickname: '',
+        userId: '',
+        evidenceTemplateList: []
+      },
+      ruleForm: {},
+      evidenceTemp: {
+        id: '',
+        name: '',
+        remarks: ''
+      },
+      evidenceTemplateDeleteList: '',
+      rules: {
+        name: [
+          { required: true, message: '证据模板名称不能为空', trigger: 'blur' }
+        ]
       }
     }
   },
+  created() {
+    this.getList()
+  },
   methods: {
-    submitForm(formName) {
-      this.$refs[formName].validate(valid => {
-        if (valid) {
-          alert('submit!')
-        } else {
-          console.log('error submit!!')
-          return false
-        }
-      })
+    getList() {
+      this.ruleForm.evidenceTemplateList = [
+        { id: 1, name: 'xiao', nickname: 'deng' }
+      ]
     },
-    resetForm(formName) {
-      this.$refs[formName].resetFields()
-    },
-    removeDomain(item) {
-      var index = this.dynamicValidateForm.domains.indexOf(item)
-      if (index !== -1) {
-        this.dynamicValidateForm.domains.splice(index, 1)
-      }
-    },
-    addDomain() {
-      this.dynamicValidateForm.domains.push({
-        value: '',
-        key: Date.now()
+    saveData() {
+      //删除最后一行
+      let index = this.ruleForm.evidenceTemplateList.length - 1
+      this.ruleForm.evidenceTemplateList.splice(index, 1)
+      this.$nextTick(() => {
+        this.$refs['ruleForm'].validate(valid => {
+          if (valid) {
+            this.loading = true
+            //根据状态dialogStatus判断是新增还是更新
+            if (this.dialogStatus == 'create') {
+              this.createTemp()
+            } else {
+              this.updateTemp()
+            }
+          } else {
+            this.ruleForm.evidenceTemplateList.push(
+              JSON.parse(JSON.stringify(this.evidenceTemp))
+            )
+            return false
+          }
+        })
       })
     }
   }

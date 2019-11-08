@@ -5,8 +5,8 @@
         <el-input type="text" v-model="item.key" disabled />
       </el-form-item>
 
-      <el-form-item label="列数" prop="column">
-        <el-input type="text" v-model="item.config.column" />
+      <el-form-item label="名称" prop="label">
+        <el-input type="text" v-model="item.config.label" />
       </el-form-item>
     </el-form>
   </div>

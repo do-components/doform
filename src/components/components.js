@@ -23,7 +23,8 @@ const baseComponent = [
     type: 'form-table',
     name: '子表',
     config: {
-      column: 1
+      column: 1,
+      label: '子表项'
     },
     columns: [],
     children: []
