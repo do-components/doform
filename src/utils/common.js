@@ -1,4 +1,4 @@
-const formBuiltInNames = ['input', 'grid', 'form-table', 'textarea']
+const formBuiltInNames = ['input', 'grid', 'form-table', 'textarea', 'number']
 import formComponentsMap from '@/components/form-components'
 import formConfigComponentssMap from '@/components/form-config'
 

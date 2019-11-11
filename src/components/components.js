@@ -1,12 +1,24 @@
 const baseComponent = [
   {
     type: 'input',
-    name: '单行文本',
+    name: '数字输入框',
     config: {
       label: '单行文本',
       default: '',
       required: false,
       placeholder: ''
+    }
+  },
+  {
+    type: 'number',
+    name: '数字输入框',
+    config: {
+      label: '数字输入框',
+      default: 0,
+      required: false,
+      min: 0,
+      max: 0,
+      step: 1
     }
   },
   {

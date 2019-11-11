@@ -1,5 +1,6 @@
 import Input from './input'
 import Textarea from './textarea'
+import Number from './number'
 
 import Grid from './grid'
 import FormTable from './form-table'
@@ -7,6 +8,7 @@ import FormTable from './form-table'
 const formComponentsMap = {
   [Input.name]: Input,
   [Textarea.name]: Textarea,
+  [Number.name]: Number,
   [Grid.name]: Grid,
   [FormTable.name]: FormTable
 }
