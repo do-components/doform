@@ -10,15 +10,15 @@
 }
 .active .masking {
   // border: 1px dashed #bb121a;
-  outline: 2px solid #409eff;
-  border: 1px solid #409eff;
+  // outline: 1px solid #409eff;
+  border: 2px dashed #409eff;
 }
 .masking:hover {
   // background-color: rgba(255, 0, 255, 0.1);
   // border: 1px solid black;
   // border: 1px dashed #bb121a;
-  outline: 2px solid #409eff;
-  border: 1px solid #409eff;
+  // outline: 1px solid #409eff;
+  border: 2px dashed #409eff;
 }
 .active {
   .masking .masking__drag,

@@ -154,13 +154,15 @@ export default {
       return result
     },
     resetData() {
+      this.resetForm()
+
       this.formConfig.list.forEach(item => {
         if (item.columns) {
           item.columns = []
         }
         delete this.formData[item.key]
       })
-      this.clearForm()
+      // this.resetForm()
     },
     resetForm() {
       console.log('reset')
@@ -217,15 +219,19 @@ export default {
     return (
       <div class="form-preview-container">
         <ElForm
-          labelWidth={this.formConfig.config.labelWidth + 'px'}
-          labelPosition={this.formConfig.config.labelPosition}
+          // labelWidth={this.formConfig.config.labelWidth + 'px'}
+          // labelPosition={this.formConfig.config.labelPosition}
+          // size={this.formConfig.config.size}
           ref="previewForm"
-          size={this.formConfig.config.size}
           // validateOnRuleChange={false}
           {...{
             props: {
               model: this.formData
               // rules: { name: { required: true, trigger: ['blur'] } }
+            },
+            attrs: {
+              ...this.formConfig.config,
+              labelWidth: this.formConfig.config.labelWidth + 'px'
             }
           }}
         >

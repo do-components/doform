@@ -449,22 +449,16 @@ export default {
           </ElTabs>
         </ElAside>
         <ElMain class="form-design-container">
-          <ElCard>
-            <div class="el-card__header">
-              <div>
-                <ElButton type="primary" size="small" onClick={this.getJSON}>
-                  获取数据
-                </ElButton>
-                <ElButton
-                  type="success"
-                  size="small"
-                  onClick={this.showPreview}
-                >
-                  预览
-                </ElButton>
-              </div>
+          <ElCard class="box-card">
+            <div slot="header" class="clearfix">
+              <ElButton type="primary" size="small" onClick={this.getJSON}>
+                获取数据
+              </ElButton>
+              <ElButton type="success" size="small" onClick={this.showPreview}>
+                预览
+              </ElButton>
             </div>
-            <div class="el-card__body">
+            <div class="el-card__body2">
               {previewDialog}
 
               <ElForm
@@ -550,8 +544,9 @@ export default {
   // }
 }
 .form-design-container {
-  height: 95vh;
-  .h-form {
+  height: 96vh;
+  padding: 0 10px;
+  .el-form {
     height: 100%;
   }
 }
@@ -575,19 +570,11 @@ export default {
     font-size: 12px;
   }
 }
-
-.form-design-container .h-main {
-  background: #f5f5f5;
-  border: 1px solid #e5e5e5;
-}
 .component-container {
   clear: both;
-  // min-height: 60px;
   margin: 10px;
   padding: 15px;
   padding-bottom: 1px;
-
-  // box-sizing: border-box;
   position: relative;
   cursor: move;
 }
@@ -603,9 +590,8 @@ export default {
   flex-wrap: wrap;
 }
 .component-item {
-  // margin: 10px;
   padding: 10px;
   padding-left: 0;
-  cursor: move;
+  cursor: pointer;
 }
 </style>

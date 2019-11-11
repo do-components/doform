@@ -1,5 +1,5 @@
 <template>
-  <el-form size="small" v-model="config">
+  <el-form size="small" v-model="config" label-position="top">
     <el-form-item label="标签对齐方式" prop="labelPosition">
       <el-radio-group v-model="config.labelPosition">
         <el-radio-button label="left">左对齐</el-radio-button>
@@ -8,7 +8,14 @@
       </el-radio-group>
     </el-form-item>
     <el-form-item label="标签对齐宽度" prop="labelWidth">
-      <el-input type="number" v-model="config.labelWidth" />
+      <el-input-number
+        type="number"
+        :step="1"
+        step-strictly
+        v-model="config.labelWidth"
+        :min="20"
+        :max="100"
+      />
     </el-form-item>
     <el-form-item label="组件尺寸" prop="size">
       <el-radio-group v-model="config.size">

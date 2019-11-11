@@ -59,7 +59,7 @@ export default {
             id: 'form-table_1573029062825'
           }
         ],
-        config: { labelWidth: 100, labelPosition: 'right', size: 'small' }
+        config: { labelWidth: 80, labelPosition: 'right', size: 'small' }
       },
       formData: {
         name: '',
