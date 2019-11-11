@@ -4,6 +4,7 @@
     v-model="newValue"
     v-on="onEvents"
     :rows="item.config.rows"
+    :placeholder="item.config.placeholder"
   />
 </template>
 

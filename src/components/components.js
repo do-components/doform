@@ -2,14 +2,11 @@ const baseComponent = [
   {
     type: 'input',
     name: '单行文本',
-    attr: {
-      size: 'large',
-      value: '第一个'
-    },
     config: {
       label: '单行文本',
       default: '',
-      required: false
+      required: false,
+      placeholder: ''
     }
   },
   {
@@ -19,6 +16,7 @@ const baseComponent = [
       label: '多行文本',
       default: '',
       required: false,
+      placeholder: '',
       rows: 3
     }
   },

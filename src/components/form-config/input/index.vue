@@ -29,6 +29,14 @@
           placeholder="请输入默认值"
         />
       </el-form-item>
+
+      <el-form-item label="占位内容" prop="placeholder">
+        <el-input
+          type="text"
+          v-model="item.config.placeholder"
+          placeholder="请输入占位内容"
+        />
+      </el-form-item>
     </el-form>
   </div>
 </template>

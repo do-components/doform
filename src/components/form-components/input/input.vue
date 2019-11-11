@@ -1,5 +1,10 @@
 <template>
-  <el-input type="text" v-model="newValue" v-on="onEvents" />
+  <el-input
+    type="text"
+    v-model="newValue"
+    v-on="onEvents"
+    :placeholder="item.config.placeholder"
+  />
 </template>
 
 <script>
