@@ -62,7 +62,7 @@ export default {
       console.log('reslt', this.formData)
     },
     // 递归函数
-    loop(arr, index) {
+    renderComponents(arr, index) {
       const that = this
       const result = arr.map((item, i) => {
         const indexs = index === '' ? String(i) : `${index}-${i}`
@@ -71,7 +71,7 @@ export default {
           //   const grid = that.$createElement(
           //     GridInfo,
           //     { props: { wiget: item, dataID: indexs } },
-          //     that.loop(item.children, indexs)
+          //     that.renderComponents(item.children, indexs)
           //   )
           //   return grid
           return (
@@ -81,7 +81,7 @@ export default {
               data-id={indexs}
             >
               <div class="container-block">
-                {that.loop(item.children, indexs)}
+                {that.renderComponents(item.children, indexs)}
               </div>
             </div>
           )
@@ -215,7 +215,7 @@ export default {
     }
   },
   render() {
-    const result = this.loop(this.formItems, '')
+    const result = this.renderComponents(this.formItems, '')
     return (
       <div class="form-preview-container">
         <ElForm

@@ -168,7 +168,7 @@ export default {
                   return (
                     <el-form-item labelWidth="0px">
                       <el-button
-                        type="text danger"
+                        type="text"
                         size="small"
                         onClick={this.removeColumn.bind(this, scope.$index)}
                       >

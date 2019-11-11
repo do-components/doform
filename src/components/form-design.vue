@@ -80,7 +80,7 @@ export default {
       this.visible = true
     },
     // 递归函数
-    loop(arr, index) {
+    renderComponents(arr, index) {
       const that = this
       const directives = [{ name: 'masking' }]
 
@@ -115,7 +115,7 @@ export default {
                 move={this.sortItemMove}
                 nativeOnClick={this.selectContainer.bind(this, item)}
               >
-                {that.loop(item.children, indexs)}
+                {that.renderComponents(item.children, indexs)}
               </draggable>,
               <div class="container-actions">
                 <div
@@ -152,7 +152,7 @@ export default {
               move={this.sortItemMove}
               nativeOnClick={this.selectContainer.bind(this, item)}
             >
-              {that.loop(item.columns, indexs)}
+              {that.renderComponents(item.columns, indexs)}
             </draggable>
           )
           const actionItems = (
@@ -439,7 +439,7 @@ export default {
       </div>
     )
 
-    const result = this.loop(this.baseComponents, '')
+    const result = this.renderComponents(this.baseComponents, '')
 
     return (
       <ElContainer>
