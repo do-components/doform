@@ -29,12 +29,16 @@
           placeholder="请输入默认值"
         />
       </el-form-item>
+
+      <el-form-item label="行数" prop="rows">
+        <el-input-number :min="1" :max="10" v-model="item.config.rows" />
+      </el-form-item>
     </el-form>
   </div>
 </template>
 <script>
 export default {
-  name: 'DoInputConfig',
+  name: 'DoTextareaConfig',
   props: {
     item: {
       tppe: Object,

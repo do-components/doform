@@ -13,6 +13,16 @@ const baseComponent = [
     }
   },
   {
+    type: 'textarea',
+    name: '多行文本',
+    config: {
+      label: '多行文本',
+      default: '',
+      required: false,
+      rows: 3
+    }
+  },
+  {
     type: 'grid',
     name: '栅格',
     config: {

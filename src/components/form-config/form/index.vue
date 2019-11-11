@@ -1,5 +1,5 @@
 <template>
-  <el-form size="small" v-model="config" label-position="top">
+  <el-form v-model="config" size="small" label-position="top">
     <el-form-item label="标签对齐方式" prop="labelPosition">
       <el-radio-group v-model="config.labelPosition">
         <el-radio-button label="left">左对齐</el-radio-button>
