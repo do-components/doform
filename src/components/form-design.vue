@@ -1,5 +1,5 @@
 <script>
-import { baseComponent } from '@/components/components'
+import { baseComponent, containerComponent } from '@/components/components'
 import draggable from 'vuedraggable'
 import uniqueId from 'lodash.uniqueid'
 import cloneDeep from 'lodash.clonedeep'
@@ -15,13 +15,13 @@ export default {
   data() {
     return {
       baseComponents: [],
-      componentList: baseComponent,
+      // baseComponent: baseComponent,
       currentItem: null,
       currentItemPath: null,
       formData: {},
       visible: false,
       configActive: 'itemConfig',
-      formKey: 0,
+      componenListActive: 'baseList',
       formConfig: { labelWidth: 100, labelPosition: 'right', size: 'small' }
     }
   },
@@ -370,23 +370,46 @@ export default {
   computed: {},
   render() {
     const side = (
-      <draggable
-        group={{ name: 'formItem', pull: 'clone', put: false }}
-        sort={false}
-        key={uniqueId()}
-        list={this.componentList}
-        clone={this.cloneCom}
-        class="component-list"
-        move={this.sortItemMove}
-      >
-        {this.componentList.map((item, index) => {
-          return (
-            <div class="component-item" key={index}>
-              <ElTag type="primary">{item.name}</ElTag>
-            </div>
-          )
-        })}
-      </draggable>
+      <el-tabs vModel={this.componenListActive}>
+        <el-tab-pane label="表单控件" name="baseList">
+          <draggable
+            group={{ name: 'formItem', pull: 'clone', put: false }}
+            sort={false}
+            key={uniqueId()}
+            list={baseComponent}
+            clone={this.cloneCom}
+            class="component-list"
+            move={this.sortItemMove}
+          >
+            {baseComponent.map((item, index) => {
+              return (
+                <div class="component-item" key={index}>
+                  <ElTag type="primary">{item.name}</ElTag>
+                </div>
+              )
+            })}
+          </draggable>
+        </el-tab-pane>
+        <el-tab-pane label="布局控件" name="containerList">
+          <draggable
+            group={{ name: 'formItem', pull: 'clone', put: false }}
+            sort={false}
+            key={uniqueId()}
+            list={containerComponent}
+            clone={this.cloneCom}
+            class="component-list"
+            move={this.sortItemMove}
+          >
+            {containerComponent.map((item, index) => {
+              return (
+                <div class="component-item" key={index}>
+                  <ElTag type="primary">{item.name}</ElTag>
+                </div>
+              )
+            })}
+          </draggable>
+        </el-tab-pane>
+      </el-tabs>
     )
 
     const previewDialog = (
@@ -443,11 +466,7 @@ export default {
 
     return (
       <ElContainer>
-        <ElAside style="width: 250px">
-          <ElTabs>
-            <ElTabPane label="控件列表">{side}</ElTabPane>
-          </ElTabs>
-        </ElAside>
+        <ElAside style="width: 250px">{side}</ElAside>
         <ElMain class="form-design-container">
           <ElCard class="box-card">
             <div slot="header" class="clearfix">

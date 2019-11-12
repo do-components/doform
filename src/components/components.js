@@ -1,7 +1,7 @@
 const baseComponent = [
   {
     type: 'input',
-    name: '数字输入框',
+    name: '单行文本',
     config: {
       label: '单行文本',
       default: '',
@@ -59,23 +59,6 @@ const baseComponent = [
       { label: '选项1', value: '选项1' },
       { label: '选项2', value: '选项2' }
     ]
-  },
-  {
-    type: 'grid',
-    name: '栅格',
-    config: {
-      column: 24
-    }
-  },
-  {
-    type: 'form-table',
-    name: '子表',
-    config: {
-      column: 1,
-      label: '子表项'
-    },
-    columns: [],
-    children: []
   }
   // {
   //   name: 'Input',
@@ -128,4 +111,23 @@ const baseComponent = [
   //   ]
   // }
 ]
-export { baseComponent }
+const containerComponent = [
+  {
+    type: 'grid',
+    name: '栅格',
+    config: {
+      column: 24
+    }
+  },
+  {
+    type: 'form-table',
+    name: '子表',
+    config: {
+      column: 1,
+      label: '子表项'
+    },
+    columns: [],
+    children: []
+  }
+]
+export { baseComponent, containerComponent }

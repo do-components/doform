@@ -72,6 +72,10 @@ export default {
   },
   methods: {
     removeOption(index) {
+      const value = this.item.options[index].value
+      if (this.item.config.default === value) {
+        this.item.config.default = ''
+      }
       this.item.options.splice(index, 1)
     },
     addOption() {
