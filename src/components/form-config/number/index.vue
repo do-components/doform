@@ -1,11 +1,6 @@
 <template>
-  <div class="config">
-    <el-form
-      ref="inputFrom"
-      :model="item.config"
-      size="small"
-      label-position="top"
-    >
+  <div class="config-form">
+    <el-form :model="item.config" size="small" label-position="top">
       <el-form-item label="组件Key" v-if="item.key">
         <el-input type="text" v-model="item.key" disabled />
       </el-form-item>

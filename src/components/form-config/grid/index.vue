@@ -1,5 +1,5 @@
 <template>
-  <div class="config">
+  <div class="config-form">
     <el-form :model="item.config" size="small" label-position="top">
       <el-form-item label="组件Key" v-if="item.key">
         <el-input type="text" v-model="item.key" disabled />
