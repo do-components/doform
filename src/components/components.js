@@ -59,72 +59,36 @@ const baseComponent = [
       { label: '选项1', value: '选项1' },
       { label: '选项2', value: '选项2' }
     ]
+  },
+  {
+    type: 'select',
+    name: '下拉列表',
+    config: {
+      label: '下拉列表',
+      default: '',
+      required: false,
+      placeholder: ''
+    },
+    options: [
+      { label: '选项1', value: '选项1' },
+      { label: '选项2', value: '选项2' }
+    ]
   }
-  // {
-  //   name: 'Input',
-  //   attr: {
-  //     size: 'default',
-  //     value: '第二个'
-  //   }
-  // },
-  // {
-  //   name: 'Input',
-  //   attr: {
-  //     size: 'small',
-  //     value: '第三个'
-  //   }
-  // },
-  // {
-  //   name: 'Containers',
-  //   attr: {
-  //     style: {
-  //       border: '1px solid red'
-  //     }
-  //   },
-  //   children: [
-  //     {
-  //       name: 'Input',
-  //       attr: {
-  //         size: 'small',
-  //         value: '嵌套的input'
-  //       }
-  //     },
-  //     {
-  //       name: 'Rate',
-  //       attr: {
-  //         size: 'small',
-  //         value: '嵌套的input'
-  //       }
-  //     },
-  //     {
-  //       name: 'MonthPicker',
-  //       attr: {}
-  //     },
-  //     {
-  //       name: 'RangePicker',
-  //       attr: {}
-  //     },
-  //     {
-  //       name: 'WeekPicker',
-  //       attr: {}
-  //     }
-  //   ]
-  // }
 ]
 const containerComponent = [
   {
     type: 'grid',
-    name: '栅格',
+    name: '栅格布局',
     config: {
       column: 24
     }
   },
   {
     type: 'form-table',
-    name: '子表',
+    name: '明细子表',
     config: {
       column: 1,
-      label: '子表项'
+      label: '明细子表'
     },
     columns: [],
     children: []
