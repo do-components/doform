@@ -47,6 +47,20 @@ const baseComponent = [
     ]
   },
   {
+    type: 'checkbox',
+    name: '多选框',
+    config: {
+      label: '多选框',
+      default: ['选项1'],
+      required: false,
+      placeholder: ''
+    },
+    options: [
+      { label: '选项1', value: '选项1' },
+      { label: '选项2', value: '选项2' }
+    ]
+  },
+  {
     type: 'grid',
     name: '栅格',
     config: {

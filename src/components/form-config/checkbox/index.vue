@@ -18,7 +18,7 @@
       </el-form-item>
 
       <el-form-item label="选项" prop="options">
-        <el-radio-group v-model="item.config.default">
+        <el-checkbox-group v-model="item.config.default">
           <draggable
             tag="ul"
             class="options-list"
@@ -27,13 +27,13 @@
             handle=".drag-item"
           >
             <li v-for="(option, index) in item.options" :key="index">
-              <el-radio :label="option.value">
+              <el-checkbox :label="option.value">
                 <el-input
                   size="mini"
                   v-model="option.label"
                   @input="labelUpdate(option)"
                 ></el-input>
-              </el-radio>
+              </el-checkbox>
               <i class="el-icon-s-fold drag-item" />
               <el-button
                 class="el-icon-minus"
@@ -46,7 +46,7 @@
               ></el-button>
             </li>
           </draggable>
-        </el-radio-group>
+        </el-checkbox-group>
         <div><el-button type="text" @click="addOption">添加项</el-button></div>
       </el-form-item>
     </el-form>
@@ -55,7 +55,7 @@
 <script>
 import draggable from 'vuedraggable'
 export default {
-  name: 'DoRadioConfig',
+  name: 'DoCheckboxConfig',
   components: {
     draggable
   },
@@ -67,13 +67,22 @@ export default {
   },
   data() {
     return {
-      options: this.item.options
+      newValue: []
     }
   },
   methods: {
+    // 移除选项
     removeOption(index) {
+      const value = this.item.options[index].value
+      if (this.item.config.default.includes(value)) {
+        this.item.config.default = this.item.config.default.filter(elm => {
+          return elm !== value
+        })
+      }
       this.item.options.splice(index, 1)
     },
+
+    // 添加选项
     addOption() {
       const newIndex = this.item.options.length + 1
       this.item.options.push({
@@ -81,9 +90,11 @@ export default {
         value: '选项' + newIndex
       })
     },
+
+    // 同步更新value, 此处为了简单处理直接把默认值清空
     labelUpdate(option) {
       option.value = option.label
-      this.item.config.default = option.value
+      this.item.config.default = []
     }
   },
   computed: {}

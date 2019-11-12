@@ -2,6 +2,7 @@ import Input from './input'
 import Textarea from './textarea'
 import Number from './number'
 import Radio from './radio'
+import Checkbox from './checkbox'
 
 import Grid from './grid'
 import FormTable from './form-table'
@@ -11,6 +12,7 @@ const formComponentsMap = {
   [Textarea.name]: Textarea,
   [Number.name]: Number,
   [Radio.name]: Radio,
+  [Checkbox.name]: Checkbox,
   [Grid.name]: Grid,
   [FormTable.name]: FormTable
 }

@@ -94,9 +94,9 @@ export default {
       // }
 
       if (this.checkType(value)) {
-        // if (this.customInit) {
-        //   value = this.customInit(value)
-        // }
+        if (this.customInit) {
+          value = this.customInit(value)
+        }
         this.newValue = value
       }
     }
