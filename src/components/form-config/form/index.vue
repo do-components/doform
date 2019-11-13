@@ -14,7 +14,7 @@
         step-strictly
         v-model="config.labelWidth"
         :min="20"
-        :max="100"
+        :max="200"
       />
     </el-form-item>
     <el-form-item label="组件尺寸" prop="size">

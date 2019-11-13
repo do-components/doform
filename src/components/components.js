@@ -73,6 +73,20 @@ const baseComponent = [
       { label: '选项1', value: '选项1' },
       { label: '选项2', value: '选项2' }
     ]
+  },
+  {
+    type: 'date-picker',
+    name: '日期选择',
+    config: {
+      label: '日期选择',
+      default: '',
+      required: false,
+      type: 'date',
+      format: 'yyyy-MM-dd',
+      placeholder: '',
+      startPlaceholder: '',
+      endPlaceholder: ''
+    }
   }
 ]
 const containerComponent = [

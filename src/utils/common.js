@@ -5,6 +5,7 @@ const formBuiltInNames = [
   'radio',
   'checkbox',
   'select',
+  'date-picker',
 
   'grid',
   'form-table'
