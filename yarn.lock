@@ -4957,6 +4957,11 @@ lru-cache@^5.1.1:
   dependencies:
     yallist "^3.0.2"
 
+ly-downloader@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.npm.taobao.org/ly-downloader/download/ly-downloader-1.0.5.tgz#fba9a6e4575cc5b8e82fa7328bf8629ea62bbc36"
+  integrity sha1-+6mm5FdcxbjoL6cyi/hinqYrvDY=
+
 make-dir@^2.0.0:
   version "2.1.0"
   resolved "https://registry.npm.taobao.org/make-dir/download/make-dir-2.1.0.tgz#5f0310e18b8be898cc07009295a30ae41e91e6f5"
@@ -6417,6 +6422,11 @@ prettier@^1.18.2:
   version "1.18.2"
   resolved "https://registry.npm.taobao.org/prettier/download/prettier-1.18.2.tgz#6823e7c5900017b4bd3acf46fe9ac4b4d7bda9ea"
   integrity sha1-aCPnxZAAF7S9Os9G/prEtNe9qeo=
+
+pretty-bytes@^5.3.0:
+  version "5.3.0"
+  resolved "https://registry.npm.taobao.org/pretty-bytes/download/pretty-bytes-5.3.0.tgz#f2849e27db79fb4d6cfe24764fc4134f165989f2"
+  integrity sha1-8oSeJ9t5+01s/iR2T8QTTxZZifI=
 
 pretty-error@^2.0.2:
   version "2.1.1"
@@ -8067,6 +8077,14 @@ vm-browserify@^1.0.1:
   version "1.1.0"
   resolved "https://registry.npm.taobao.org/vm-browserify/download/vm-browserify-1.1.0.tgz#bd76d6a23323e2ca8ffa12028dc04559c75f9019"
   integrity sha1-vXbWojMj4sqP+hICjcBFWcdfkBk=
+
+vue-ele-upload-file@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.npm.taobao.org/vue-ele-upload-file/download/vue-ele-upload-file-0.0.4.tgz#4e1cf719350d97369904a089844c4afeb939ffe2"
+  integrity sha1-Thz3GTUNlzaZBKCJhExK/rk5/+I=
+  dependencies:
+    ly-downloader "^1.0.5"
+    pretty-bytes "^5.3.0"
 
 vue-eslint-parser@^5.0.0:
   version "5.0.0"

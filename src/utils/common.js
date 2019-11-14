@@ -6,6 +6,7 @@ const formBuiltInNames = [
   'checkbox',
   'select',
   'date-picker',
+  'file-upload',
 
   'grid',
   'form-table'

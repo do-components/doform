@@ -87,6 +87,17 @@ const baseComponent = [
       startPlaceholder: '',
       endPlaceholder: ''
     }
+  },
+  {
+    type: 'file-upload',
+    name: '文件上传',
+    config: {
+      label: '文件上传',
+      default: [],
+      required: false,
+      limit: 2,
+      tip: '只能上传jpg/png文件，且不超过500kb'
+    }
   }
 ]
 const containerComponent = [

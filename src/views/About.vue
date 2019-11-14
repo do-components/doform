@@ -57,6 +57,20 @@ export default {
             ],
             key: 'form-table_1573029062825',
             id: 'form-table_1573029062825'
+          },
+          {
+            type: 'file-upload',
+            name: '文件上传',
+            config: {
+              label: '文件上传',
+              default: [],
+              required: false,
+              url: 'http://localhost:4000/uploaders/file',
+              limit: 2,
+              tip: '只能上传jpg/png文件，且不超过500kb'
+            },
+            key: 'file-upload_1573697680080',
+            id: 'file-upload_1573697680080'
           }
         ],
         config: { labelWidth: 80, labelPosition: 'right', size: 'small' }
@@ -68,7 +82,10 @@ export default {
           { input_15730289804902: 2, input_157302898049022: '333' }
           // { input_15730289804902: 3, input_157302898049022: '333' }
         ],
-        input_15730289804930: '12312'
+        input_15730289804930: '12312',
+        'file-upload_1573697680080': [
+          { name: 'demo.png', key: '87gz040cxyqm7cz3ri3yf8bm8qnv' }
+        ]
       }
       // formData: {}
     }

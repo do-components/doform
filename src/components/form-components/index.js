@@ -5,6 +5,7 @@ import Radio from './radio'
 import Checkbox from './checkbox'
 import Select from './select'
 import DatePicker from './date-picker'
+import FileUpload from './file-upload'
 
 import Grid from './grid'
 import FormTable from './form-table'
@@ -17,6 +18,7 @@ const formComponentsMap = {
   [Checkbox.name]: Checkbox,
   [Select.name]: Select,
   [DatePicker.name]: DatePicker,
+  [FileUpload.name]: FileUpload,
   [Grid.name]: Grid,
   [FormTable.name]: FormTable
 }
