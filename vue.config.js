@@ -6,5 +6,9 @@ module.exports = {
       // config.devtool = 'source-map'
       config.devtool = 'cheap-module-eval-source-map'
     }
+  },
+
+  css: {
+    sourceMap: true
   }
 }
