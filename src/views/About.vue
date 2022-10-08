@@ -65,7 +65,7 @@ export default {
               label: '文件上传',
               default: [],
               required: false,
-              url: 'http://localhost:4000/uploaders/file',
+              // url: 'http://localhost:4000/uploaders/file',
               limit: 2,
               tip: '只能上传jpg/png文件，且不超过500kb'
             },
@@ -84,7 +84,9 @@ export default {
         ],
         input_15730289804930: '12312',
         'file-upload_1573697680080': [
-          { name: 'demo.png', key: '87gz040cxyqm7cz3ri3yf8bm8qnv' }
+          { name: 'demo.png', key: '87gz040cxyqm7cz3ri3yf8bm8qnv' },
+          { name: '扫描 2.jpeg', key: '873bc094b986260555c3c3e80ef82398.jpeg' },
+          { name: '11p.jpg', key: '0d812c72640c7a5e80f42ce2ec572845.jpg' }
         ]
       }
       // formData: {}

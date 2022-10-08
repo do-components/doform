@@ -76,7 +76,9 @@ export default {
     handleSuccess(response) {
       const { blob } = response
       this.$emit('input', [
-        ...this.list,
+        ...this.list.map(item => {
+          return { name: item.name, key: item.key }
+        }),
         { name: blob.filename, key: blob.key }
       ])
     },
