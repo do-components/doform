@@ -19,7 +19,6 @@ export default defineConfig({
       name: 'Doform',
       fileName: format => `doform.${format}.js`
     },
-    sourcemap: true,
     rollupOptions: {
       external: ['vue'],
       output: {
@@ -27,8 +26,7 @@ export default defineConfig({
         //   if (assetInfo.name === 'style.css') return 'custom.css'
         //   return assetInfo.name
         // },
-        // Provide global variables to use in the UMD build
-        // for externalized deps
+        exports: 'named',
         globals: {
           vue: 'Vue'
         }

@@ -25,10 +25,7 @@ if (typeof window !== 'undefined' && window.Vue) {
   install(window.Vue)
 }
 
-export { install as Doform, FormPreview, FormDesign }
+const DoForm = { install }
 
-// export default {
-//   install,
-//   FormPreview,
-//   FormDesign
-// }
+export { install, FormPreview, FormDesign }
+export default DoForm
