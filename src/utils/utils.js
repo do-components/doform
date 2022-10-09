@@ -6,7 +6,7 @@
  * @LastEditors: Please set LastEditors
  */
 
-import cloneDeep from 'lodash/cloneDeep'
+import cloneDeep from 'lodash.clonedeep'
 
 /**
  * 将下标数组转为数组

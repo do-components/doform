@@ -2,7 +2,7 @@
 import { baseComponent } from '@/components/components'
 import draggable from 'vuedraggable'
 import uniqueId from 'lodash.uniqueid'
-import cloneDeep from 'lodash.cloneDeep'
+import cloneDeep from 'lodash.clonedeep'
 import common from '@/utils/common'
 
 import { isPath, getCloneItem, itemRemove } from '@/utils/utils'

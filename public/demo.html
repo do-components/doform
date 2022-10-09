@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.7.10/dist/vue.js"></script>
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <!-- 引入组件库 -->
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script src="./doform.umd.js"></script>
+  <link rel="stylesheet" href="./style.css">
+  <script>
+    Vue.prototype.$DoFormOptions = {
+      upload: {
+        action: "http://localhost:3000/upload",
+        host: "http://localhost:3000/uploads",
+        fileSize: 1
+      }
+    }
+    Vue.component("design", Doform.FormDesign)
+    document.addEventListener("DOMContentLoaded", () => {
+      console.log('start', Doform)
+
+      var app2 = new Vue({
+        el: '#app',
+        data: {
+        }
+      })
+    })
+
+
+  </script>
+</head>
+
+<body>
+  <div id="app">
+    <design></design>
+  </div>
+</body>
+
+</html>

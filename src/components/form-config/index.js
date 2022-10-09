@@ -1,15 +1,15 @@
-import Input from './input'
-import Number from './number'
+import Input from './input/index.vue'
+import Number from './number/index.vue'
 
-import Textarea from './textarea'
-import Radio from './radio'
-import Checkbox from './checkbox'
-import Select from './select'
-import DatePicker from './date-picker'
-import FileUpload from './file-upload'
+import Textarea from './textarea/index.vue'
+import Radio from './radio/index.vue'
+import Checkbox from './checkbox/index.vue'
+import Select from './select/index.vue'
+import DatePicker from './date-picker/index.vue'
+import FileUpload from './file-upload/index.vue'
 
-import Grid from './grid'
-import FormTable from './form-table'
+import Grid from './grid/index.vue'
+import FormTable from './form-table/index.vue'
 // 所有组件
 const formConfigComponentsMap = {
   [Input.name]: Input,

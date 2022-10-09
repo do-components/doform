@@ -1,4 +1,4 @@
-import Checkbox from './checkbox'
+import Checkbox from './checkbox.vue'
 
 if (typeof window !== 'undefined' && window.Vue) {
   // 自动加载至全局组件

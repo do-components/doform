@@ -1,11 +1,11 @@
-<script>
+<script lang="jsx">
 // @ is an alias to /src
 import draggable from 'vuedraggable'
 import common from '@/utils/common'
 import cloneDeep from 'lodash.clonedeep'
 
-import formComponentsMap from '@/components/form-components/'
-import FormItem from './form-item'
+import formComponentsMap from '@/components/form-components/index.js'
+import FormItem from './form-item.vue'
 const GlobalComponent = formComponentsMap
 export default {
   name: 'FormPreview',

@@ -1,4 +1,4 @@
-<script>
+<script lang="jsx">
 import { baseComponent, containerComponent } from '@/components/components'
 import draggable from 'vuedraggable'
 import uniqueId from 'lodash.uniqueid'
@@ -6,12 +6,15 @@ import cloneDeep from 'lodash.clonedeep'
 import common from '@/utils/common'
 
 import { isPath, getCloneItem, itemRemove } from '@/utils/utils'
-import FormPreview from './form-preview'
-import CusDialog from './cus-dialog'
-import FormConfig from '@/components/form-config/form'
+import FormPreview from './form-preview.vue'
+import CusDialog from './cus-dialog.vue'
+import FormConfig from '@/components/form-config/form/index.vue'
 
 export default {
   name: 'FormDesign',
+  props: {
+    showJSON: { type: Boolean, default: true }
+  },
   data() {
     return {
       baseComponents: [],
@@ -470,9 +473,11 @@ export default {
         <ElMain class="form-design-container">
           <ElCard class="box-card">
             <div slot="header" class="clearfix">
-              <ElButton type="primary" size="small" onClick={this.getJSON}>
-                获取数据
-              </ElButton>
+              {this.showJSON && (
+                <ElButton type="primary" size="small" onClick={this.getJSON}>
+                  获取数据
+                </ElButton>
+              )}
               <ElButton type="success" size="small" onClick={this.showPreview}>
                 预览
               </ElButton>
@@ -565,9 +570,14 @@ export default {
 .form-design-container {
   height: 96vh;
   padding: 0 10px;
-  .el-form {
-    height: 100%;
-  }
+  box-sizing: border-box;
+  //.el-form {
+  //  height: 100%;
+  //}
+  // .box-card {
+  //   box-sizing: border-box;
+  //  height: 100%;
+  // }
 }
 .container-actions {
   display: none;

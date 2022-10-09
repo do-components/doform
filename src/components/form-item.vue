@@ -1,4 +1,4 @@
-<script>
+<script lang="jsx">
 import common from '@/utils/common'
 import formComponentsMap from '@/components/form-components/'
 const GlobalComponent = formComponentsMap

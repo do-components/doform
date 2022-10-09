@@ -5,17 +5,17 @@ import masking from './directive/masking/index.js'
 
 Vue.use(masking)
 
-FormDesign.install = function(Vue) {
+FormDesign.install = function (Vue) {
   Vue.component(FormDesign.name, FormDesign)
 }
 
-FormPreview.install = function(Vue) {
+FormPreview.install = function (Vue) {
   Vue.component(FormPreview.name, FormPreview)
 }
 
 const components = [FormDesign, FormPreview]
 
-const install = function(Vue) {
+const install = function (Vue) {
   components.forEach(component => {
     Vue.component(component.name, component)
   })
@@ -25,10 +25,10 @@ if (typeof window !== 'undefined' && window.Vue) {
   install(window.Vue)
 }
 
-export { install, FormPreview, FormDesign }
+export { install as Doform, FormPreview, FormDesign }
 
-export default {
-  install,
-  FormPreview,
-  FormDesign
-}
+// export default {
+//   install,
+//   FormPreview,
+//   FormDesign
+// }

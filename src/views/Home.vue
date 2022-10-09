@@ -1,10 +1,10 @@
 <template>
   <div class="about">
-    <FormDesign />
+    <FormDesign :showJSON="false" />
   </div>
 </template>
 <script>
-import FormDesign from '@/components/form-design'
+import FormDesign from '@/components/form-design.vue'
 export default {
   components: {
     FormDesign
